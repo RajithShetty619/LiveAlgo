@@ -1,8 +1,6 @@
 {
-  "name": "pathfinding-visualizer",
+  "name": "live-algo",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "http://rohithaug.github.io/pathfinding-visualizer",
   "dependencies": {
     "bootstrap": "^4.5.2",
     "cra-template": "1.0.3",
