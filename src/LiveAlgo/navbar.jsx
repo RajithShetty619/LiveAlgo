@@ -182,31 +182,7 @@ class NavBar extends Component {
                     onClick={() => this.selectAlgorithm("Visualize Dijkstra")}
                   >
                     Dijkstra's Algorithm
-                  </button>
-                  {/* <button
-                    className="dropdown-item btn-light"
-                    type="button"
-                    onClick={() => this.selectAlgorithm("Visualize A*")}
-                  >
-                    A* Algorithm
-                  </button> */}
-                  {/* <button
-                    className="dropdown-item btn-light"
-                    type="button"
-                    onClick={() => this.selectAlgorithm("Visualize Greedy BFS")}
-                  >
-                    Greedy Best First Search
-                  </button> */}
-                  {/* <button
-                    className="dropdown-item btn-light"
-                    type="button"
-                    onClick={() =>
-                      this.selectAlgorithm("Visualize Bidirectional Greedy")
-                    }
-                  >
-                    Bidirectional Greedy Search
-                  </button> */}
-                  <div className="dropdown-divider"></div>
+                  </button>  
                   <button
                     className="dropdown-item btn-light"
                     type="button"
@@ -224,16 +200,7 @@ class NavBar extends Component {
                     }
                   >
                     Depth First Search
-                  </button>
-                  <button
-                    className="dropdown-item btn-light"
-                    type="button"
-                    onClick={() =>
-                      this.selectAlgorithm("Visualize Random Walk")
-                    }
-                  >
-                    Random Walk
-                  </button>
+                  </button> 
                 </div>
               </div>{" "}
             </li>

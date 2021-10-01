@@ -1,6 +1,6 @@
 {
-  "short_name": "Pathfinding Viz",
-  "name": "Pathfinding and Maze Generation Visualizer",
+  "short_name": "algorithmlive",
+  "name": "algorithmlive",
   "icons": [
     {
       "src": "favicon.ico",

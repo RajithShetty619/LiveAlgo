@@ -1,40 +1,40 @@
 import React, { Component } from "react";
-import "./pathfindingVisualizer.css";
+import "./LiveAlgo.css";
 import Node from "./Node/node";
 import NavBar from "./navbar";
 
-//Pathfinding Algorithms
+// Algorithms
 import {
   dijkstra,
   getNodesInShortestPathOrderDijkstra,
-} from "../pathfindingAlgorithms/dijkstra";
+} from "../algorithms/dijkstra";
 import {
   astar,
   getNodesInShortestPathOrderAstar,
-} from "../pathfindingAlgorithms/astar";
+} from "../algorithms/astar";
 import {
   breadthFirstSearch,
   getNodesInShortestPathOrderBFS,
-} from "../pathfindingAlgorithms/breadthFirstSearch";
+} from "../algorithms/breadthFirstSearch";
 import {
   depthFirstSearch,
   getNodesInShortestPathOrderDFS,
-} from "../pathfindingAlgorithms/depthFirstSearch";
-import { randomWalk } from "../pathfindingAlgorithms/randomWalk";
+} from "../algorithms/depthFirstSearch";
+import { randomWalk } from "../algorithms/randomWalk";
 import {
   greedyBFS,
   getNodesInShortestPathOrderGreedyBFS,
-} from "../pathfindingAlgorithms/greedyBestFirstSearch";
+} from "../algorithms/greedyBestFirstSearch";
 import {
   bidirectionalGreedySearch,
   getNodesInShortestPathOrderBidirectionalGreedySearch,
-} from "../pathfindingAlgorithms/bidirectionalGreedySearch";
+} from "../algorithms/bidirectionalGreedySearch";
 
 //Maze Algorithms
-import { randomMaze } from "../mazeAlgorithms/randomMaze";
-import { recursiveDivisionMaze } from "../mazeAlgorithms/recursiveDivision";
-import { verticalMaze } from "../mazeAlgorithms/verticalMaze";
-import { horizontalMaze } from "../mazeAlgorithms/horizontalMaze";
+// import { randomMaze } from "../mazeAlgorithms/randomMaze";
+// import { recursiveDivisionMaze } from "../mazeAlgorithms/recursiveDivision";
+// import { verticalMaze } from "../mazeAlgorithms/verticalMaze";
+// import { horizontalMaze } from "../mazeAlgorithms/horizontalMaze";
 
 const initialNum = getInitialNum(window.innerWidth, window.innerHeight);
 const initialNumRows = initialNum[0];
@@ -46,11 +46,11 @@ const startNodeCol = startFinishNode[1];
 const finishNodeRow = startFinishNode[2];
 const finishNodeCol = startFinishNode[3];
 
-class PathfindingVisualizer extends Component {
+class LiveAlgo extends Component {
   state = {
     grid: [],
     mouseIsPressed: false,
-    visualizingAlgorithm: false,
+    materializingAlgorithm: false,
     generatingMaze: false,
     width: window.innerWidth,
     height: window.innerHeight,
@@ -94,7 +94,7 @@ class PathfindingVisualizer extends Component {
   }
 
   clearGrid() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
     for (let row = 0; row < this.state.grid.length; row++) {
@@ -112,13 +112,13 @@ class PathfindingVisualizer extends Component {
     const newGrid = getInitialGrid(this.state.numRows, this.state.numColumns);
     this.setState({
       grid: newGrid,
-      visualizingAlgorithm: false,
+      materializingAlgorithm: false,
       generatingMaze: false,
     });
   }
 
   clearPath() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
     for (let row = 0; row < this.state.grid.length; row++) {
@@ -134,14 +134,14 @@ class PathfindingVisualizer extends Component {
     const newGrid = getGridWithoutPath(this.state.grid);
     this.setState({
       grid: newGrid,
-      visualizingAlgorithm: false,
+      materializingAlgorithm: false,
       generatingMaze: false,
     });
   }
 
   animateShortestPath = (nodesInShortestPathOrder, visitedNodesInOrder) => {
     if (nodesInShortestPathOrder.length === 1)
-      this.setState({ visualizingAlgorithm: false });
+      this.setState({ materializingAlgorithm: false });
     for (let i = 1; i < nodesInShortestPathOrder.length; i++) {
       if (i === nodesInShortestPathOrder.length - 1) {
         setTimeout(() => {
@@ -150,7 +150,7 @@ class PathfindingVisualizer extends Component {
             nodesInShortestPathOrder,
             visitedNodesInOrder
           );
-          this.setState({ grid: newGrid, visualizingAlgorithm: false });
+          this.setState({ grid: newGrid, materializingAlgorithm: false });
         }, i * (3 * this.state.speed));
         return;
       }
@@ -198,7 +198,7 @@ class PathfindingVisualizer extends Component {
     for (let i = 1; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
-          this.setState({ visualizingAlgorithm: false });
+          this.setState({ materializingAlgorithm: false });
         }, i * this.state.speed);
         return;
       }
@@ -244,7 +244,7 @@ class PathfindingVisualizer extends Component {
               visitedNodesInOrder
             );
           } else {
-            this.setState({ visualizingAlgorithm: false });
+            this.setState({ materializingAlgorithm: false });
           }
         }, i * this.state.speed);
         return;
@@ -262,10 +262,10 @@ class PathfindingVisualizer extends Component {
   }
 
   visualizeDijkstra() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
-    this.setState({ visualizingAlgorithm: true });
+    this.setState({ materializingAlgorithm: true });
     setTimeout(() => {
       const { grid } = this.state;
       const startNode = grid[startNodeRow][startNodeCol];
@@ -279,10 +279,10 @@ class PathfindingVisualizer extends Component {
   }
 
   visualizeAStar() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
-    this.setState({ visualizingAlgorithm: true });
+    this.setState({ materializingAlgorithm: true });
     setTimeout(() => {
       const { grid } = this.state;
       const startNode = grid[startNodeRow][startNodeCol];
@@ -296,10 +296,10 @@ class PathfindingVisualizer extends Component {
   }
 
   visualizeBFS() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
-    this.setState({ visualizingAlgorithm: true });
+    this.setState({ materializingAlgorithm: true });
     setTimeout(() => {
       const { grid } = this.state;
       const startNode = grid[startNodeRow][startNodeCol];
@@ -317,10 +317,10 @@ class PathfindingVisualizer extends Component {
   }
 
   visualizeDFS() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
-    this.setState({ visualizingAlgorithm: true });
+    this.setState({ materializingAlgorithm: true });
     setTimeout(() => {
       const { grid } = this.state;
       const startNode = grid[startNodeRow][startNodeCol];
@@ -334,10 +334,10 @@ class PathfindingVisualizer extends Component {
   }
 
   visualizeRandomWalk() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
-    this.setState({ visualizingAlgorithm: true });
+    this.setState({ materializingAlgorithm: true });
     setTimeout(() => {
       const { grid } = this.state;
       const startNode = grid[startNodeRow][startNodeCol];
@@ -348,10 +348,10 @@ class PathfindingVisualizer extends Component {
   }
 
   visualizeGreedyBFS() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
-    this.setState({ visualizingAlgorithm: true });
+    this.setState({ materializingAlgorithm: true });
     setTimeout(() => {
       const { grid } = this.state;
       const startNode = grid[startNodeRow][startNodeCol];
@@ -365,10 +365,10 @@ class PathfindingVisualizer extends Component {
   }
 
   visualizeBidirectionalGreedySearch() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
+    if (this.state.materializingAlgorithm || this.state.generatingMaze) {
       return;
     }
-    this.setState({ visualizingAlgorithm: true });
+    this.setState({ materializingAlgorithm: true });
     setTimeout(() => {
       const { grid } = this.state;
       const startNode = grid[startNodeRow][startNodeCol];
@@ -414,68 +414,14 @@ class PathfindingVisualizer extends Component {
     }
   };
 
-  generateRandomMaze() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
-      return;
-    }
-    this.setState({ generatingMaze: true });
-    setTimeout(() => {
-      const { grid } = this.state;
-      const startNode = grid[startNodeRow][startNodeCol];
-      const finishNode = grid[finishNodeRow][finishNodeCol];
-      const walls = randomMaze(grid, startNode, finishNode);
-      this.animateMaze(walls);
-    }, this.state.mazeSpeed);
-  }
-
-  generateRecursiveDivisionMaze() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
-      return;
-    }
-    this.setState({ generatingMaze: true });
-    setTimeout(() => {
-      const { grid } = this.state;
-      const startNode = grid[startNodeRow][startNodeCol];
-      const finishNode = grid[finishNodeRow][finishNodeCol];
-      const walls = recursiveDivisionMaze(grid, startNode, finishNode);
-      this.animateMaze(walls);
-    }, this.state.mazeSpeed);
-  }
-
-  generateVerticalMaze() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
-      return;
-    }
-    this.setState({ generatingMaze: true });
-    setTimeout(() => {
-      const { grid } = this.state;
-      const startNode = grid[startNodeRow][startNodeCol];
-      const finishNode = grid[finishNodeRow][finishNodeCol];
-      const walls = verticalMaze(grid, startNode, finishNode);
-      this.animateMaze(walls);
-    }, this.state.mazeSpeed);
-  }
-
-  generateHorizontalMaze() {
-    if (this.state.visualizingAlgorithm || this.state.generatingMaze) {
-      return;
-    }
-    this.setState({ generatingMaze: true });
-    setTimeout(() => {
-      const { grid } = this.state;
-      const startNode = grid[startNodeRow][startNodeCol];
-      const finishNode = grid[finishNodeRow][finishNodeCol];
-      const walls = horizontalMaze(grid, startNode, finishNode);
-      this.animateMaze(walls);
-    }, this.state.mazeSpeed);
-  }
+  
 
   render() {
     let { grid } = this.state;
     return (
       <React.Fragment>
         <NavBar
-          visualizingAlgorithm={this.state.visualizingAlgorithm}
+          materializingAlgorithm={this.state.materializingAlgorithm}
           generatingMaze={this.state.generatingMaze}
           visualizeDijkstra={this.visualizeDijkstra.bind(this)}
           visualizeAStar={this.visualizeAStar.bind(this)}
@@ -484,21 +430,14 @@ class PathfindingVisualizer extends Component {
             this
           )}
           visualizeBFS={this.visualizeBFS.bind(this)}
-          visualizeDFS={this.visualizeDFS.bind(this)}
-          visualizeRandomWalk={this.visualizeRandomWalk.bind(this)}
-          generateRandomMaze={this.generateRandomMaze.bind(this)}
-          generateRecursiveDivisionMaze={this.generateRecursiveDivisionMaze.bind(
-            this
-          )}
-          generateVerticalMaze={this.generateVerticalMaze.bind(this)}
-          generateHorizontalMaze={this.generateHorizontalMaze.bind(this)}
+          visualizeDFS={this.visualizeDFS.bind(this)} 
           clearGrid={this.clearGrid.bind(this)}
           clearPath={this.clearPath.bind(this)}
           updateSpeed={this.updateSpeed.bind(this)}
         />
         <div
           className={
-            this.state.visualizingAlgorithm || this.state.generatingMaze
+            this.state.materializingAlgorithm || this.state.generatingMaze
               ? "grid-visualizing"
               : "grid"
           }
@@ -742,7 +681,7 @@ const getVisitedNodesInOrder = (
   return visitedNodesInOrder;
 };
 
-export default PathfindingVisualizer;
+export default LiveAlgo;
 
 /* <button className="button" onClick={() => this.visualizeDijkstra()}>
 Dijkstra's
