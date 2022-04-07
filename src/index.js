@@ -4,11 +4,11 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/js/dist/dropdown";
-import LiveAlgo from "./LiveAlgo/LiveAlgo";
+import PathfindingVisualizer from "./pathfindingVisualizer/pathfindingVisualizer";
 
 ReactDOM.render(
   <React.StrictMode>
-    <LiveAlgo />
+    <PathfindingVisualizer />
   </React.StrictMode>,
   document.getElementById("root")
 );

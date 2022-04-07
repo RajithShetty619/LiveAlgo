@@ -102,7 +102,12 @@ class NavBar extends Component {
         this.props.generateVerticalMaze();
       else if (this.state.maze === "Generate Horizontal Maze")
         this.props.generateHorizontalMaze();
+        else if (this.state.maze === "Custom Maze")
+        this.props.generateCustomMaze();
     }
+  }
+  printMaze(){
+    this.props.printMaze();
   }
 
   clearGrid() {
@@ -182,7 +187,31 @@ class NavBar extends Component {
                     onClick={() => this.selectAlgorithm("Visualize Dijkstra")}
                   >
                     Dijkstra's Algorithm
-                  </button>  
+                  </button>
+                  {/* <button
+                    className="dropdown-item btn-light"
+                    type="button"
+                    onClick={() => this.selectAlgorithm("Visualize A*")}
+                  >
+                    A* Algorithm
+                  </button> */}
+                  {/* <button
+                    className="dropdown-item btn-light"
+                    type="button"
+                    onClick={() => this.selectAlgorithm("Visualize Greedy BFS")}
+                  >
+                    Greedy Best First Search
+                  </button> */}
+                  {/* <button
+                    className="dropdown-item btn-light"
+                    type="button"
+                    onClick={() =>
+                      this.selectAlgorithm("Visualize Bidirectional Greedy")
+                    }
+                  >
+                    Bidirectional Greedy Search
+                  </button> */}
+                  <div className="dropdown-divider"></div>
                   <button
                     className="dropdown-item btn-light"
                     type="button"
@@ -200,7 +229,16 @@ class NavBar extends Component {
                     }
                   >
                     Depth First Search
-                  </button> 
+                  </button>
+                  <button
+                    className="dropdown-item btn-light"
+                    type="button"
+                    onClick={() =>
+                      this.selectAlgorithm("Visualize Random Walk")
+                    }
+                  >
+                    Random Walk
+                  </button>
                 </div>
               </div>{" "}
             </li>
@@ -253,6 +291,13 @@ class NavBar extends Component {
                     onClick={() => this.selectMaze("Generate Horizontal Maze")}
                   >
                     Horizontal Division Maze
+                  </button> 
+                  <button
+                    className="dropdown-item btn-light"
+                    type="button"
+                    onClick={() => this.selectMaze("Custom Maze")}
+                  >
+                    Custom Maze
                   </button>
                 </div>
               </div>{" "}
@@ -264,7 +309,7 @@ class NavBar extends Component {
                 onClick={() => this.generateMaze()}
               >
                 {this.state.maze}
-              </button>
+              </button> 
             </li>
             
             <li>
