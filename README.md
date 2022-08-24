@@ -1,4 +1,4 @@
-Directional Navigation Algorithm
+Live Algorithm 
 
 In today’s world navigating and travelling from one place to another 
 using an app for directions has become the de facto and with various 
